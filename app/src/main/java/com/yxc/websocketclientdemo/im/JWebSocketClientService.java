@@ -19,6 +19,7 @@ import android.util.Log;
 import com.yxc.websocketclientdemo.MainActivity;
 import com.yxc.websocketclientdemo.R;
 import com.yxc.websocketclientdemo.util.Util;
+import com.yxc.websocketclientdemo.util.VibrateHelper;
 
 import org.java_websocket.handshake.ServerHandshake;
 
@@ -122,6 +123,12 @@ public class JWebSocketClientService extends Service {
             @Override
             public void onMessage(String message) {
                 Log.e("JWebSocketClientService", "收到的消息：" + message);
+
+
+                if (message.contains("十分抱歉，由于服务器资源紧张")) {
+                    // 震动提醒：
+                    VibrateHelper.Vibrate(JWebSocketClientService.this, new long[]{0, 200, 300, 200}, false);
+                }
 
                 Intent intent = new Intent();
                 intent.setAction("com.xch.servicecallback.content");

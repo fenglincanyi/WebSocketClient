@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
     <RelativeLayout
         android:id="@+id/jmui_menu_title_bar"
         android:layout_width="match_parent"
@@ -19,6 +18,14 @@
             android:background="@drawable/jmui_back_btn_bg"
             android:src="@drawable/back" />
 
+
+        <ImageButton
+            android:id="@+id/jmui_right_btn"
+            android:layout_width="@dimen/title_bar_height"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/jmui_back_btn_bg"
+            android:src="@drawable/jmui_chat_detail" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -46,22 +53,32 @@
                 android:textSize="20sp" />
 
         </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/jmui_right_btn"
-            android:layout_width="@dimen/title_bar_height"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/jmui_back_btn_bg"
-            android:src="@drawable/jmui_chat_detail" />
     </RelativeLayout>
 
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
     <ListView
         android:id="@+id/chatmsg_listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:divider="@null" />
+
+        <TextView
+            android:id="@+id/tvConnectState"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="6dp"
+            android:visibility="gone"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="#ff0000"
+            tools:text="连接失败" />
+
+    </FrameLayout>
 
 
     <include layout="@layout/view_keyboard_xhs" />

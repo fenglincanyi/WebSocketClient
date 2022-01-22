@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private JWebSocketClientService jWebSClientService;
     private EditText et_content;
     private ListView listView;
+    private TextView tvConnectState;
     private Button btn_send;
     private List<ChatMessage> chatMessageList = new ArrayList<>();//消息列表
     private Adapter_ChatMessage adapter_chatMessage;
@@ -126,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listView = findViewById(R.id.chatmsg_listView);
         btn_send = findViewById(R.id.btn_send);
         et_content = findViewById(R.id.et_content);
+        tvConnectState = findViewById(R.id.tvConnectState);
         btn_send.setOnClickListener(this);
     }
     private void initView() {
@@ -174,7 +176,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     chatMessageList.add(chatMessage);
                     initChatMsgListView();
                     et_content.setText("");
+                    tvConnectState.setVisibility(View.GONE);
                 } else {
+                    tvConnectState.setText("连接已断开，请稍等或重启App哟");
+                    tvConnectState.setVisibility(View.VISIBLE);
                     Util.showToast(mContext, "连接已断开，请稍等或重启App哟");
                 }
                 break;
