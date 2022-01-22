@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 27
+
+        applicationId "com.heytap.wearable.oms.demo.phone"
+        versionCode 6
+        versionName "0.0.6"
+
+        manifestPlaceholders = [
+                "service_permission": "com.heytap.wearable.oms.permission.TRACSPORT",
+                "target_package"    : "com.heytap.wearable.oms.demo.wear",
+                "targetSignature"   : "d456f3a56b5d494cf1c27a41f6c32717",
+        ]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:1.1.0"
+    implementation fileTree(dir: "${rootDir}\\libs", include: ['*.aar'])
+}

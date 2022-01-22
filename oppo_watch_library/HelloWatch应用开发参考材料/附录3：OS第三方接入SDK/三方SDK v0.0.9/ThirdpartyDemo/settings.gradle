@@ -1,0 +1,4 @@
+rootProject.name='ThirdpartyDemon'
+
+include ':PhoneDemo'
+include ':WearDemo'
