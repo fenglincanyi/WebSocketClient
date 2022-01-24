@@ -1,4 +1,4 @@
-package com.yxc.websocketclientdemo;
+package com.yxc.websocketclientdemo.ui;
 
 import android.annotation.TargetApi;
 import android.app.AppOpsManager;
@@ -26,6 +26,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.yxc.websocketclientdemo.R;
 import com.yxc.websocketclientdemo.adapter.Adapter_ChatMessage;
 import com.yxc.websocketclientdemo.im.JWebSocketClient;
 import com.yxc.websocketclientdemo.im.JWebSocketClientService;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private JWebSocketClientService.JWebSocketClientBinder binder;
     private JWebSocketClientService jWebSClientService;
     private EditText et_content;
+    private TextView tv_groupOrContactName;
     private ListView listView;
     private TextView tvConnectState;
     private Button btn_send;
@@ -97,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checkNotification(mContext);
         findViewById();
         initView();
+
+        tv_groupOrContactName.setText("服务器："+Util.ws);
     }
 
     /**
@@ -128,7 +132,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn_send = findViewById(R.id.btn_send);
         et_content = findViewById(R.id.et_content);
         tvConnectState = findViewById(R.id.tvConnectState);
+        tv_groupOrContactName = findViewById(R.id.tv_groupOrContactName);
         btn_send.setOnClickListener(this);
+        findViewById(R.id.iv_return).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     private void initView() {
         //监听输入框的变化

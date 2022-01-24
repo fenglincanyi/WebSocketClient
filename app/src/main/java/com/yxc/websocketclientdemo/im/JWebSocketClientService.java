@@ -16,11 +16,14 @@ import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.yxc.websocketclientdemo.MainActivity;
+import com.yxc.websocketclientdemo.ui.MainActivity;
 import com.yxc.websocketclientdemo.R;
 import com.yxc.websocketclientdemo.util.Util;
 import com.yxc.websocketclientdemo.util.VibrateHelper;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.java_websocket.handshake.ServerHandshake;
 
 import java.net.URI;
@@ -81,6 +84,11 @@ public class JWebSocketClientService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        if(!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+
         //初始化websocket
         initSocketClient();
         mHandler.postDelayed(heartBeatRunnable, HEART_BEAT_RATE);//开启心跳检测
@@ -106,8 +114,16 @@ public class JWebSocketClientService extends Service {
 
     @Override
     public void onDestroy() {
+        EventBus.getDefault().unregister(this);
         closeConnect();
         super.onDestroy();
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessage(MessageEvent event) {
+        if (event.isClose){
+            stopSelf();
+        }
     }
 
     public JWebSocketClientService() {
@@ -127,7 +143,7 @@ public class JWebSocketClientService extends Service {
 
                 if (message.contains("十分抱歉，由于服务器资源紧张")) {
                     // 震动提醒：
-                    VibrateHelper.Vibrate(JWebSocketClientService.this, new long[]{0, 200, 300, 200}, false);
+//                    VibrateHelper.Vibrate(JWebSocketClientService.this, new long[]{0, 200, 300, 200}, false);
                 }
 
                 Intent intent = new Intent();

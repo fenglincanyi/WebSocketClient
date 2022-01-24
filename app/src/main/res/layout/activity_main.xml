@@ -25,6 +25,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:background="@drawable/jmui_back_btn_bg"
+            android:visibility="gone"
             android:src="@drawable/jmui_chat_detail" />
 
         <LinearLayout
@@ -38,11 +39,10 @@
                 android:id="@+id/tv_groupOrContactName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxWidth="190dp"
                 android:singleLine="true"
-                android:text="服务器"
+                android:text="服务器xxxxxxxxxxxxxxxxxxxxxxxx"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/jmui_group_num_tv"

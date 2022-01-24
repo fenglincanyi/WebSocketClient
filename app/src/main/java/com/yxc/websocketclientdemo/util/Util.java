@@ -11,7 +11,7 @@ public class Util {
 //    public static final String ws = "ws://echo.websocket.org";//websocket测试地址
 
 //    public static final String ws = "ws://49.234.18.41:8866";//websocket测试地址
-    public static final String ws = "ws://121.40.165.18:8800";//websocket测试地址
+    public static String ws = "ws://121.40.165.18:8800";//websocket测试地址
 
     public static void showToast(Context ctx, String msg) {
         Toast.makeText(ctx, msg, Toast.LENGTH_LONG).show();
